@@ -1,0 +1,114 @@
+/* GENERAL */
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(120deg,#e9f1ff,#f9fbff);
+  margin:0;
+  color:#333;
+}
+
+/* HEADER */
+header{
+  background: linear-gradient(90deg,#0a7cff,#004aad);
+  color:#fff;
+  padding:25px 15px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  letter-spacing:1px;
+}
+header p{
+  margin-top:8px;
+  font-size:15px;
+  opacity:0.9;
+}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:30px auto;
+  padding:15px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:10px;
+  margin-bottom:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+.card h2{
+  margin-top:0;
+  color:#004aad;
+}
+
+/* INPUTS */
+input, select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+}
+input:focus, select:focus{
+  outline:none;
+  border-color:#0a7cff;
+  box-shadow:0 0 0 2px rgba(10,124,255,0.15);
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:12px;
+  background:#0a7cff;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  background:#004aad;
+  transform:translateY(-1px);
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+th{
+  background:#0a7cff;
+  color:#fff;
+  padding:10px;
+  text-align:left;
+}
+td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
+}
+tr:hover{
+  background:#f2f7ff;
+}
+
+/* HIDDEN */
+.hidden{
+  display:none;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  header h1{
+    font-size:20px;
+  }
+  .card{
+    padding:18px;
+  }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<title>VIWANGO STATIONARY | Online Application</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0}
+header{background:#0a7cff;color:#fff;padding:15px;text-align:center}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;border-radius:6px;margin-bottom:20px}
+input,select,button{width:100%;padding:10px;margin:8px 0}
+button{background:#0a7cff;color:#fff;border:none;cursor:pointer}
+button:hover{background:#055ec4}
+.hidden{display:none}
+table{width:100%;border-collapse:collapse}
+table,th,td{border:1px solid #ccc}
+th,td{padding:8px;text-align:left}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>VIWANGO STATIONARY</h1>
+<p>Huduma za Maombi ya Vyuo & Nyaraka</p>
+</header>
+
+<div class="container">
+
+<!-- FORM -->
+<div class="card" id="formSection">
+<h2>Fomu ya Maombi</h2>
+<input type="text" id="name" placeholder="Jina Kamili" required>
+<input type="tel" id="phone" placeholder="Namba ya Simu" required>
+
+<select id="university">
+<option value="">-- Chagua Chuo --</option>
+<option>University of Dar es Salaam</option>
+<option>Sokoine University of Agriculture</option>
+<option>University of Dodoma</option>
+<option>Muhimbili University</option>
+<option>Muslim University of Morogoro</option>
+<option>Open University of Tanzania</option>
+</select>
+
+<input type="file" id="passport" accept="image/*" required>
+
+<button onclick="submitForm()">Tuma Maombi</button>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="card">
+<h2>Admin Login</h2>
+<input type="text" id="adminUser" placeholder="Username">
+<input type="password" id="adminPass" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="card hidden" id="adminPanel">
+<h2>Admin Dashboard</h2>
+<table>
+<thead>
+<tr>
+<th>Jina</th>
+<th>Simu</th>
+<th>Chuo</th>
+<th>Passport</th>
+</tr>
+</thead>
+<tbody id="dataTable"></tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+function submitForm(){
+let data={
+name:document.getElementById("name").value,
+phone:document.getElementById("phone").value,
+university:document.getElementById("university").value,
+passport:document.getElementById("passport").files[0]?.name
+};
+
+if(!data.name || !data.phone || !data.university){
+alert("Jaza taarifa zote");
+return;
+}
+
+let records=JSON.parse(localStorage.getItem("viwangoData"))||[];
+records.push(data);
+localStorage.setItem("viwangoData",JSON.stringify(records));
+alert("Maombi yametumwa kikamilifu");
+}
+
+function login(){
+let u=document.getElementById("adminUser").value;
+let p=document.getElementById("adminPass").value;
+
+if(u==="admin" && p==="admin123"){
+document.getElementById("adminPanel").classList.remove("hidden");
+loadData();
+}else{
+alert("Login imekataa");
+}
+}
+
+function loadData(){
+let records=JSON.parse(localStorage.getItem("viwangoData"))||[];
+let table=document.getElementById("dataTable");
+table.innerHTML="";
+records.forEach(r=>{
+table.innerHTML+=`<tr>
+<td>${r.name}</td>
+<td>${r.phone}</td>
+<td>${r.university}</td>
+<td>${r.passport}</td>
+</tr>`;
+});
+}
+</script>
+
+</body>
+</html>
