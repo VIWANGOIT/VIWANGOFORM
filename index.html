@@ -2,50 +2,127 @@
 <html lang="sw">
 <head>
 <meta charset="UTF-8">
-<title>VIWANGO STATIONARY | Online Application</title>
+<title>VIWANGO STATIONERY & INTERNET CAFE</title>
 <style>
-body{font-family:Arial;background:#f4f4f4;margin:0}
-header{background:#0a7cff;color:#fff;padding:15px;text-align:center}
-.container{max-width:900px;margin:auto;padding:20px}
-.card{background:#fff;padding:20px;border-radius:6px;margin-bottom:20px}
-input,select,button{width:100%;padding:10px;margin:8px 0}
-button{background:#0a7cff;color:#fff;border:none;cursor:pointer}
-button:hover{background:#055ec4}
+body{
+  font-family:Arial, sans-serif;
+  background:#f0f2f5;
+  margin:0;
+}
+header{
+  background:linear-gradient(90deg,#0a2540,#0fb9b1);
+  color:#fff;
+  padding:25px;
+  text-align:center;
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+h2{color:#0a2540}
+input,select,button{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+button{
+  background:#0fb9b1;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{background:#0a2540}
 .hidden{display:none}
-table{width:100%;border-collapse:collapse}
-table,th,td{border:1px solid #ccc}
-th,td{padding:8px;text-align:left}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+table,th,td{
+  border:1px solid #ddd;
+}
+th{
+  background:#0a2540;
+  color:#fff;
+}
+th,td{
+  padding:10px;
+  text-align:left;
+}
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+.service{
+  background:#f9f9f9;
+  padding:15px;
+  border-left:5px solid #0fb9b1;
+  border-radius:6px;
+}
+footer{
+  background:#0a2540;
+  color:#fff;
+  text-align:center;
+  padding:15px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>VIWANGO STATIONARY</h1>
-<p>Huduma za Maombi ya Vyuo & Nyaraka</p>
+<h1>VIWANGO STATIONERY & INTERNET CAFE</h1>
+<p>Huduma Zote za Stationery & Internet Café Tanzania</p>
 </header>
 
 <div class="container">
 
+<!-- SERVICES -->
+<div class="card">
+<h2>Huduma Zetu</h2>
+<div class="services">
+  <div class="service">📄 Printing & Photocopy</div>
+  <div class="service">🖨️ Scanning & Lamination</div>
+  <div class="service">📧 Email & Online Applications</div>
+  <div class="service">🎓 Maombi ya Vyuo & Mikopo (HESLB)</div>
+  <div class="service">💼 CV & Cover Letter Writing</div>
+  <div class="service">📶 Internet Café & Hotspot</div>
+  <div class="service">🎫 Uuzaji wa Internet Vocha</div>
+  <div class="service">📑 Government Services (NIDA, TRA, BRELA)</div>
+  <div class="service">📱 SIM Registration & Online Forms</div>
+</div>
+</div>
+
 <!-- FORM -->
 <div class="card" id="formSection">
-<h2>Fomu ya Maombi</h2>
+<h2>Omba Huduma</h2>
 <input type="text" id="name" placeholder="Jina Kamili" required>
 <input type="tel" id="phone" placeholder="Namba ya Simu" required>
 
-<select id="university">
-<option value="">-- Chagua Chuo --</option>
-<option>University of Dar es Salaam</option>
-<option>Sokoine University of Agriculture</option>
-<option>University of Dodoma</option>
-<option>Muhimbili University</option>
-<option>Muslim University of Morogoro</option>
-<option>Open University of Tanzania</option>
+<select id="service">
+<option value="">-- Chagua Huduma --</option>
+<option>Printing & Photocopy</option>
+<option>Online Application</option>
+<option>Maombi ya Mkopo wa Elimu</option>
+<option>CV & Cover Letter</option>
+<option>Internet Café / Vocha</option>
+<option>NIDA / TRA / BRELA</option>
 </select>
 
-<input type="file" id="passport" accept="image/*" required>
+<input type="file" id="document">
 
-<button onclick="submitForm()">Tuma Maombi</button>
+<button onclick="submitForm()">Tuma Ombi</button>
 </div>
 
 <!-- ADMIN LOGIN -->
@@ -64,8 +141,8 @@ th,td{padding:8px;text-align:left}
 <tr>
 <th>Jina</th>
 <th>Simu</th>
-<th>Chuo</th>
-<th>Passport</th>
+<th>Huduma</th>
+<th>Faili</th>
 </tr>
 </thead>
 <tbody id="dataTable"></tbody>
@@ -74,24 +151,29 @@ th,td{padding:8px;text-align:left}
 
 </div>
 
+<footer>
+<p>📍 Viwango Stationery & Internet Cafe – Tanzania</p>
+<p>📞 0658515520</p>
+</footer>
+
 <script>
 function submitForm(){
 let data={
 name:document.getElementById("name").value,
 phone:document.getElementById("phone").value,
-university:document.getElementById("university").value,
-passport:document.getElementById("passport").files[0]?.name
+service:document.getElementById("service").value,
+file:document.getElementById("document").files[0]?.name || "-"
 };
 
-if(!data.name || !data.phone || !data.university){
-alert("Jaza taarifa zote");
+if(!data.name || !data.phone || !data.service){
+alert("Tafadhali jaza taarifa zote");
 return;
 }
 
 let records=JSON.parse(localStorage.getItem("viwangoData"))||[];
 records.push(data);
 localStorage.setItem("viwangoData",JSON.stringify(records));
-alert("Maombi yametumwa kikamilifu");
+alert("Ombi lako limetumwa kikamilifu");
 }
 
 function login(){
@@ -111,11 +193,12 @@ let records=JSON.parse(localStorage.getItem("viwangoData"))||[];
 let table=document.getElementById("dataTable");
 table.innerHTML="";
 records.forEach(r=>{
-table.innerHTML+=`<tr>
+table.innerHTML+=`
+<tr>
 <td>${r.name}</td>
 <td>${r.phone}</td>
-<td>${r.university}</td>
-<td>${r.passport}</td>
+<td>${r.service}</td>
+<td>${r.file}</td>
 </tr>`;
 });
 }
